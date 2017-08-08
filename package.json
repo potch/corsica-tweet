@@ -1,6 +1,6 @@
 {
   "name": "corsica-tweet",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "adapt tweets for corsica display",
   "main": "index.js",
   "scripts": {

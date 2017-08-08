@@ -36,6 +36,12 @@ module.exports = function(corsica) {
       return new Promise(function (resolve, reject) {
         og(msg.url, function (og) {
           msg.type = 'html';
+          let media;
+          if (og['video:url']) {
+            media = `<iframe src="${og['video:url']}"></iframe>`;
+          } else {
+            media = `<img src="${og.image}">`;
+          }
           msg.content = `
 <!doctype html>
 <html>
@@ -57,7 +63,7 @@ module.exports = function(corsica) {
         font-family: -apple-system, BlinkMacSystemFont, sans-serif;
         margin: 0;
       }
-      img {
+      img, iframe {
         flex: 1;
         display: block;
         object-fit: contain;
@@ -80,7 +86,7 @@ module.exports = function(corsica) {
     </style>
   </head>
   <body>
-    <img src="${og.image}">
+    ${media}
     <footer>
       <div class="logo">
         ${og.title}
