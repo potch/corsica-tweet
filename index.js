@@ -9,7 +9,6 @@
  */
 
 var cheerio = require('cheerio');
-var tweet = require('./tweet');
 
 module.exports = function(corsica) {
 
