@@ -13,10 +13,16 @@ var cheerio = require('cheerio');
 module.exports = function(corsica) {
 
   var req = corsica.request;
-  var youtube_re = RegExp('twitter.com/.*');
+  var youtube_re = RegExp('twitter.com/[^\/]+/status/');
 
   function og(url, cb) {
-    req(url, function (error, res, body) {
+    var options = {
+      url: url,
+      headers: {
+        'User-Agent': 'Firefox/62.0'
+      }
+    };
+    req(options, function (error, res, body) {
       var $ = cheerio.load(body);
       let og = $('meta[property^="og:"]');
       og = Array.from(og).reduce((obj, el) => {
@@ -81,6 +87,7 @@ module.exports = function(corsica) {
         align-items: center;
       }
       .logo {
+        margin-right: 1em;
         color: #bbb;
       }
     </style>
